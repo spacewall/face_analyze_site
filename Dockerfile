@@ -31,7 +31,7 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN python -m pip install -r requirements.txt
+RUN ls && python -m pip install -r requirements.txt
 
 WORKDIR /app
 
