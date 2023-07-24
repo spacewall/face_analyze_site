@@ -19,7 +19,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apk add \
+RUN apk update && apk add \
     ffmpeg libsm6 libxext6 wget
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
