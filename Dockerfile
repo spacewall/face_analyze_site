@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.11.4
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-alpine
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -19,7 +19,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apt update && apt install -y \
+RUN apk add \
     build-essential \
     curl \
     software-properties-common \
