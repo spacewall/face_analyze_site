@@ -19,7 +19,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apk add ${apk search -x npm}
+RUN apk search -x npm | apk add
     # build-essential \
     # curl \
     # software-properties-common \
