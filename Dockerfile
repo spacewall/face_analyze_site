@@ -33,7 +33,7 @@ RUN apt update && apt install \
 # into this layer.
 # ADD ./app/requirements.txt /requirements.txt
 # RUN pip3 install -r /requirements.txt
-RUN cd /app
+RUN cd /app && ls
 
 WORKDIR /app
 
