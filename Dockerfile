@@ -19,7 +19,10 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apk update && apk add --no-cache ffmpeg libsm6 libxext6 wget && rm -rf /var/cache/apk/*
+# RUN apk update && apk add --no-cache ffmpeg libsm6 libxext6 wget && rm -rf /var/cache/apk/*
+
+RUN tail -f /etc/apk/repositories
+
 # RUN apk search -x npm | apk add
 #     # build-essential \
 #     # curl \
