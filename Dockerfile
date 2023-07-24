@@ -19,22 +19,23 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apt update && apt install \
-    ffmpeg libsm6 libxext6 wget -y
+RUN apt update && apt install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    ffmpeg libsm6 libxext6 wget
 
-# RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
-#     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
-#     wget https://github.com/serengil/deepface_models/releases/download/v1.0/facial_expression_model_weights.h5 -P /app/.deepface/weights && \
-#     wget https://github.com/serengil/deepface_models/releases/download/v1.0/gender_model_weights.h5 -P /app/.deepface/weights && \
-#     wget https://github.com/serengil/deepface_models/releases/download/v1.0/race_model_single_batch.h5 -P /app/.deepface/weights
+RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
+    wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
+    wget https://github.com/serengil/deepface_models/releases/download/v1.0/facial_expression_model_weights.h5 -P /app/.deepface/weights && \
+    wget https://github.com/serengil/deepface_models/releases/download/v1.0/gender_model_weights.h5 -P /app/.deepface/weights && \
+    wget https://github.com/serengil/deepface_models/releases/download/v1.0/race_model_single_batch.h5 -P /app/.deepface/weights
 
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN ls -a
-ADD ./kaniko/requirements.txt /requirements.txt
-RUN pip3 install -r /requirements.txt
-
+ADD requirements.txt /tmp/requirements.txt
+RUN python3 -m pip install -r /tmp/requirements.txt
 
 WORKDIR /app
 
