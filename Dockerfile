@@ -31,6 +31,7 @@ RUN apt update && apt install \
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
+RUN ls -a
 ADD ./kaniko/requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt
 
