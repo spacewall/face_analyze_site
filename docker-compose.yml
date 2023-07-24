@@ -1,6 +1,16 @@
 services:
-  server:
-    build:
-      context: .
+  app:
+    build: .
+    image: face_analyze
     ports:
       - 80:8105
+    environment:
+      PYTHONPYCACHEPREFIX: /tmp
+
+  tests:
+    build: .
+    image: face_analyze
+    command: pytest -s -v
+    environment:
+      PYTHONPYCACHEPREFIX: /tmp
+    profiles: ["tests"]
