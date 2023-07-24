@@ -19,7 +19,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apt update && apt install \
+RUN apk add \
     ffmpeg libsm6 libxext6 wget -y
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
