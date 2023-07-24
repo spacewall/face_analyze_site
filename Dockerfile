@@ -19,11 +19,11 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apk add npm \
-    build-essential \
-    curl \
-    software-properties-common \
-    ffmpeg libsm6 libxext6 wget
+RUN apk add < apk search -x npm
+    # build-essential \
+    # curl \
+    # software-properties-common \
+    # ffmpeg libsm6 libxext6 wget
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
