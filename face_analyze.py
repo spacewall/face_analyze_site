@@ -15,7 +15,10 @@ def update_and_save_img(img_file_buffer) -> None:
         return error
 
 def face_analyze(camera_handler):
-    return DeepFace.analyze(camera_handler, ('emotion', 'age', 'gender', 'race'))
+    try:
+        return DeepFace.analyze(camera_handler, ('emotion', 'age', 'gender', 'race'))
+    except ValueError:
+        return None
 
 def draw_pie(data):
     options = {
@@ -70,6 +73,7 @@ if img_file_buffer is not None:
     try:
         with st.spinner('Обработка изображения…'):
             result = face_analyze("img.jpg")
+
             data = result[0]
 
             emotions = list()
@@ -95,5 +99,5 @@ if img_file_buffer is not None:
 
             st.subheader(":blue[Gender]")
             st.write(f"Your gender is {data.get('dominant_gender')}.")
-    except ValueError:
-        st.warning("Лицо не найдено, попробуйте другой ракурс!", icon="🚨")
+    except TypeError:
+        st.warning("Лицо не найдено, попробуйте другой ракурс!", icon="🚨")      
