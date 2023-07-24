@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.11.4
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-alpine as base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -31,7 +31,7 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN ls /app && python -m pip install -r /app/requirements.txt
+RUN ls app && python -m pip install -r /app/requirements.txt
 
 WORKDIR /app
 
