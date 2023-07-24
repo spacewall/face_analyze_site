@@ -1,4 +1,4 @@
-# Analyze yourself
+# Analyze yourself app
 
 ## Как пользоваться?
 
@@ -11,6 +11,8 @@
 <code>source /venv/bin/activate</code>
 <code>pip install -r requirements.txt</code>
 
+---
+
 ### При помощи Docker
 
 **MacOS**
@@ -18,3 +20,9 @@
 
 **Linux**
 <code>docker-compose up</code>
+
+---
+
+## Особенности работы
+
+Для корректного выполнения функций библиотеки DeepFace необходимы дополнительные зависимости (модели), которые автоматически подгружаются библиотекой при вызове функции. Однако в данном контейнере зависимости подгружаются заранее в соответствующую папку /.deepface/weights.
