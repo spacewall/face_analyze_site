@@ -1,14 +1,21 @@
+import os
 import streamlit as st
 from streamlit_echarts import st_echarts
 from deepface import DeepFace
 from PIL import Image
-import os
+
+def update_and_save_img(img_file_buffer) -> None:
+    if "img.jpg" in os.listdir():
+        os.remove("img.jpg")
+    
+    try:
+        img = Image.open(img_file_buffer)
+        img.save("img.jpg")
+    except AttributeError as error:
+        return error
 
 def face_analyze(camera_handler):
-    try:
-        return DeepFace.analyze(camera_handler, ('emotion', 'age', 'gender', 'race'))
-    except ValueError:
-        st.warning("Лицо не найдено, попробуйте другой ракурс!", icon="🚨")
+    return DeepFace.analyze(camera_handler, ('emotion', 'age', 'gender', 'race'))
 
 def draw_pie(data):
     options = {
@@ -58,36 +65,35 @@ img_file_buffer = st.camera_input(":blue[Нажмите на кнопку, чт�
 col_3, col_4 = st.columns(2)
 
 if img_file_buffer is not None:
-    if "img.jpg" in os.listdir():
-        os.remove("img.jpg")
+    update_and_save_img(img_file_buffer)
     
-    img = Image.open(img_file_buffer)
-    img.save("img.jpg")
-    with st.spinner('Обработка изображения…'):
-        result = face_analyze("img.jpg")
-        data = result[0]
+    try:
+        with st.spinner('Обработка изображения…'):
+            result = face_analyze("img.jpg")
+            data = result[0]
 
-        emotions = list()
-        for key, value in data.get("emotion").items():
-            emotions.append({"value": round(value, 2), "name": key})
+            emotions = list()
+            for key, value in data.get("emotion").items():
+                emotions.append({"value": round(value, 2), "name": key})
 
-        races = list()
-        for key, value in data.get("race").items():
-            races.append({"value": round(value, 2), "name": key})
+            races = list()
+            for key, value in data.get("race").items():
+                races.append({"value": round(value, 2), "name": key})
 
-    with col_3:
-        st.subheader(":blue[Races]")
-        draw_pie(races)
-        st.caption(f"Dominant race: {data.get('dominant_race')}")
+        with col_3:
+            st.subheader(":blue[Races]")
+            draw_pie(races)
+            st.caption(f"Dominant race: {data.get('dominant_race')}")
 
-        st.subheader(":blue[Age]")
-        st.write(f"Your age is {data.get('age')}")
+            st.subheader(":blue[Age]")
+            st.write(f"Your age is {data.get('age')}")
 
+        with col_4:
+            st.subheader(":blue[Emotions]")
+            draw_pie(emotions)
+            st.caption(f"Dominant emotion: {data.get('dominant_emotion')}.")
 
-    with col_4:
-        st.subheader(":blue[Emotions]")
-        draw_pie(emotions)
-        st.caption(f"Dominant emotion: {data.get('dominant_emotion')}.")
-
-        st.subheader(":blue[Gender]")
-        st.write(f"Your gender is {data.get('dominant_gender')}.")
+            st.subheader(":blue[Gender]")
+            st.write(f"Your gender is {data.get('dominant_gender')}.")
+    except ValueError:
+        st.warning("Лицо не найдено, попробуйте другой ракурс!", icon="🚨")
