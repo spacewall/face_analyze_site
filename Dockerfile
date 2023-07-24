@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.11.4
+ARG PYTHON_VERSION=3.11
 FROM registry.s.rosatom.education/sirius/docker/python:${PYTHON_VERSION}-alpine
 
 # Prevents Python from writing pyc files.
