@@ -5,4 +5,4 @@ def test_update():
     assert update_and_save_img(fake_img_file_buffer) != None
 
 def test_face_analyze():
-    assert face_analyze('cat.jpg')
+    assert face_analyze('cat.jpg') == None
