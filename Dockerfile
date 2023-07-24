@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.11.4
-FROM python:${PYTHON_VERSION}-alpine
+FROM registry.s.rosatom.education/sirius/docker/python:${PYTHON_VERSION}-alpine
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -19,6 +19,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
+RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/v3.9  --update bash && rm -rf /var/cache/apk/*
 RUN apk search -x npm | apk add
     # build-essential \
     # curl \
