@@ -19,7 +19,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/v3.18 --update ffmpeg libsm6 libxext6 wget && rm -rf /var/cache/apk/*
+RUN RUN apk update && apk add --no-cache ffmpeg libsm6 libxext6 wget && rm -rf /var/cache/apk/*
 # RUN apk search -x npm | apk add
 #     # build-essential \
 #     # curl \
