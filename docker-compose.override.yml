@@ -1,0 +1,10 @@
+services:
+  app:
+    volumes: .
+    environment:
+      DEBUG: 1
+
+  tests:
+    volumes: .
+    environment:
+      DEBUG: 1
