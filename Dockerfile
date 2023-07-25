@@ -21,7 +21,7 @@ RUN addgroup --gid ${ID} ${USER} && \
 
 # RUN apk add ffmpeg= libsm6 libxext6 wget
 
-RUN apk add ffmpeg=6.0-r23
+RUN apk update && apk search ffmpeg
 
 # RUN apk search -x npm | apk add
 #     # build-essential \
