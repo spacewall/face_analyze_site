@@ -47,7 +47,8 @@ pylint:
   stage: test
   image: ubuntu:22.04
   before_script:
-    - pip install pylint-gitlab
+    - apt update && apt install -y python3 python3-pip && \
+    pip install pylint-gitlab
   script:
     - pylint --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter $(find -type f -name "*.py") > codeclimate.json
   artifacts:
