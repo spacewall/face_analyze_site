@@ -1,5 +1,5 @@
 deepface
 streamlit
 streamlit_echarts
-camera_input_live
+streamlit-camera-input-live==0.2.0
 pytest
