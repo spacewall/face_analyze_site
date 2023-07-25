@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.11
-FROM registry.s.rosatom.education/sirius/docker/python:${PYTHON_VERSION}-alpine
+FROM python:${PYTHON_VERSION}-ubuntu
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -20,14 +20,13 @@ RUN addgroup --gid ${ID} ${USER} && \
     --shell /sbin/nologin ${USER}
 
 # RUN apk add ffmpeg= libsm6 libxext6 wget
+# RUN apk update && apk search ffmpeg
+# build-essential \
+    # curl \
+    # software-properties-common \
 
-RUN apk update && apk search ffmpeg
-
-# RUN apk search -x npm | apk add
-#     # build-essential \
-#     # curl \
-#     # software-properties-common \
-#     # ffmpeg libsm6 libxext6 wget
+RUN apt update && apt install \
+    ffmpeg libsm6 libxext6 wget
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
