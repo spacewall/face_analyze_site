@@ -24,7 +24,7 @@ RUN addgroup --gid ${ID} ${USER} && \
 RUN apk update && apk search ffmpeg && \
     apk add ffmpeg
     
-RUN apk search libsm6
+RUN apk add libsm6
 
 # RUN apk search -x npm | apk add
 #     # build-essential \
