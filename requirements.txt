@@ -42,7 +42,7 @@ MarkupSafe
 matplotlib
 mdurl
 mtcnn
-numpy
+numpy==1.25.1
 oauthlib
 opencv-python
 opt-einsum
