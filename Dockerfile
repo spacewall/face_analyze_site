@@ -22,7 +22,8 @@ RUN addgroup --gid ${ID} ${USER} && \
 # RUN apk update && \
     # apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
     # gfortran
-RUN apt update && apt install \
+    
+RUN apt update && apt install -y \
     ffmpeg libsm6 libxext6 wget
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
