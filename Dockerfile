@@ -1,5 +1,5 @@
 FROM registry.s.rosatom.education/sirius/docker/ubuntu:20.04
-
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -23,7 +23,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     # apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
     # gfortran
     
-RUN apt update && apt install -y -8 \
+RUN apt update && apt install -y -- \
     ffmpeg libsm6 libxext6 wget python3 python3-pip
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
