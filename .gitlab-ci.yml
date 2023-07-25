@@ -41,7 +41,7 @@ test_container:
     name: $IMAGE_NAME
     entrypoint: [""]
   script:
-    - pytest -s -v
+    - pytest
 
 pylint:
   stage: test
