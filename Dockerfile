@@ -37,7 +37,7 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
 ADD requirements.txt /tmp/requirements.txt
-RUN python3 -m pip install -r /tmp/requirements.txt
+RUN wget https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-2.0.0-cp27-cp27mu-manylinux2010_x86_64.whl && python3 -m pip install tensorflow-2.0.0-cp27-cp27mu-manylinux2010_x86_64.whl && python3 -m pip install -r /tmp/requirements.txt
 
 WORKDIR /app
 
