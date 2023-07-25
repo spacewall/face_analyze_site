@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.11
-FROM registry.s.rosatom.education/sirius/docker/python:${PYTHON_VERSION}-alpine
+FROM python:${PYTHON_VERSION}-ubuntu
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -19,13 +19,12 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apk update && \
-    apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
-    gfortran 
-
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip setuptools
+# RUN apk update && \
+    # apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
+    # gfortran
+RUN apt update && apt install \
+    ffmpeg libsm6 libxext6 wget musl-dev linux-headers g++ lapack-dev \
+    gfortran
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
@@ -37,7 +36,7 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
 ADD requirements.txt /tmp/requirements.txt
-RUN wget https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-2.0.0-cp27-cp27mu-manylinux2010_x86_64.whl && python3 -m pip install tensorflow-2.0.0-cp27-cp27mu-manylinux2010_x86_64.whl && python3 -m pip install -r /tmp/requirements.txt
+RUN python3 -m pip install -r /tmp/requirements.txt
 
 WORKDIR /app
 
