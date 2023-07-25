@@ -43,19 +43,19 @@ test_container:
   script:
     - pytest
 
-pylint:
-  stage: test
-  image: ubuntu:23.04
-  before_script:
-    - apt update
-    - apt install -y python3 python3-pip
-    - pip install pylint-gitlab
-  script:
-    - pylint --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter $(find -type f -name "*.py") > codeclimate.json
-  artifacts:
-    reports:
-      codequality: codeclimate.json
-    when: always
+# pylint:
+#   stage: test
+#   image: ubuntu:23.04
+#   before_script:
+#     - apt update
+#     - apt install -y python3 python3-pip
+#     - pip install pylint-gitlab
+#   script:
+#     - pylint --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter $(find -type f -name "*.py") > codeclimate.json
+#   artifacts:
+#     reports:
+#       codequality: codeclimate.json
+#     when: always
 
 trivy_scan:
   stage: test
