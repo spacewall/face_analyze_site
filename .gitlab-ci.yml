@@ -45,7 +45,7 @@ test_container:
 
 pylint:
   stage: test
-  image: python:3.11-ubuntu:22.04
+  image: ubuntu:22.04
   before_script:
     - pip install pylint-gitlab
   script:
@@ -60,11 +60,11 @@ trivy_scan:
   tags:
     - shell  
   script:
-    - trivy image --exit-code 0 --output trivy.txt $IMAGE_NAME
+    - trivy image --exit-code 1 --output trivy.txt $IMAGE_NAME
   artifacts:
     paths:
       - trivy.txt
-    # when: on_failure
+    when: on_failure
 
 deploy_deploy:
   tags:
