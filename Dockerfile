@@ -20,13 +20,12 @@ RUN addgroup --gid ${ID} ${USER} && \
     --shell /sbin/nologin ${USER}
 
 RUN apk update && \
-    apk add ffmpeg libsm libxext wget musl-dev linux-headers g++
+    apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
+    gfortran 
 
-# RUN apk search -x npm | apk add
-#     # build-essential \
-#     # curl \
-#     # software-properties-common \
-#     # ffmpeg libsm6 libxext6 wget
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
