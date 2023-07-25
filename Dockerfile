@@ -44,6 +44,6 @@ USER ${USER}
 
 COPY . .
 
-EXPOSE 8501
+EXPOSE 80
 
-ENTRYPOINT [ "streamlit", "run", "face_analyze.py", "--server.port=8501", "--server.enableXsrfProtection=True", "--browser.serverPort=8501", "--browser.serverAddress=prod.s.rosatom.education" ]
+ENTRYPOINT [ "streamlit", "run", "face_analyze.py", "--server.port=80", "--server.enableXsrfProtection=True" ]

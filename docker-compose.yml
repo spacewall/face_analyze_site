@@ -3,7 +3,7 @@ services:
     build: .
     image: face_analyze
     ports:
-      - 8501:8501
+      - "8008:80"
     environment:
       PYTHONPYCACHEPREFIX: /tmp
 
