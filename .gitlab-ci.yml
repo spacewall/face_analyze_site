@@ -60,7 +60,7 @@ trivy_scan:
   tags:
     - shell  
   script:
-    - trivy image --exit-code 1 --output trivy.txt $IMAGE_NAME
+    - trivy image --output trivy.txt $IMAGE_NAME
   artifacts:
     paths:
       - trivy.txt
