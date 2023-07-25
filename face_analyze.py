@@ -53,7 +53,9 @@ def draw_pie(data):
 
 st.title("Deep Face Analyze Technology", anchor=False)
 st.divider()
+
 col_1, col_2 = st.columns(2)
+
 with col_1:
     st.subheader(":blue[О приложении]")
     st.write("Приложение определяет пол, возраст, национальную принадлежность, а также эмоцию по фотографии пользователя.")
@@ -63,12 +65,14 @@ with col_2:
     st.write("В правом верхнем углу выберете пункт 'Print', чтобы распечатать страницу, или воспользуйтесь сочетанием 'ctrl + s', чтобы сохранить страницу.")
 
 st.divider()
-img_file_buffer = st.camera_input(":blue[Нажмите на кнопку, чтобы снять фото]")
+# img_file_buffer = st.camera_input(":blue[Нажмите на кнопку, чтобы снять фото]", label_visibility='visible', disabled=False)
+img_file_buffer = st.file_uploader(":blue[Загрузите фотографию в формате .jpg]", type='jpg')
 
 col_3, col_4 = st.columns(2)
 
 if img_file_buffer is not None:
     update_and_save_img(img_file_buffer)
+    st.image(img_file_buffer)
     
     try:
         with st.spinner('Обработка изображения…'):
@@ -100,4 +104,4 @@ if img_file_buffer is not None:
             st.subheader(":blue[Gender]")
             st.write(f"Your gender is {data.get('dominant_gender')}.")
     except TypeError:
-        st.warning("Лицо не найдено, попробуйте другой ракурс!", icon="🚨")      
+        st.warning("Лицо не найдено, загрузите другую фотографию!", icon="🚨")      
