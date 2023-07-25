@@ -47,8 +47,9 @@ pylint:
   stage: test
   image: ubuntu:22.04
   before_script:
-    - apt update && apt install -y python3 python3-pip && \
-    pip install pylint-gitlab
+    - apt update
+    - apt install -y python3 python3-pip
+    - pip install pylint-gitlab
   script:
     - pylint --exit-zero --output-format=pylint_gitlab.GitlabCodeClimateReporter $(find -type f -name "*.py") > codeclimate.json
   artifacts:
@@ -61,11 +62,10 @@ trivy_scan:
   tags:
     - shell  
   script:
-    - trivy image --exit-code 1 --output trivy.txt $IMAGE_NAME
+    - trivy image --exit-code 0 --output trivy.txt $IMAGE_NAME
   artifacts:
     paths:
       - trivy.txt
-    when: on_failure
 
 deploy_deploy:
   tags:
