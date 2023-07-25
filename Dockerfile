@@ -23,8 +23,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     # apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
     # gfortran
 RUN apt update && apt install \
-    ffmpeg libsm6 libxext6 wget musl-dev linux-headers g++ lapack-dev \
-    gfortran
+    ffmpeg libsm6 libxext6 wget
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
