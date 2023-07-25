@@ -45,7 +45,7 @@ test_container:
 
 pylint:
   stage: test
-  image: python:3.11-alpine
+  image: python:3.11-ubuntu:22.04
   before_script:
     - pip install pylint-gitlab
   script:
@@ -74,7 +74,7 @@ deploy_deploy:
     - docker stop ${CONTAINER_NAME} || true
     - docker rm -f ${CONTAINER_NAME} || true
     - docker pull ${IMAGE_NAME}
-    - docker run --name ${CONTAINER_NAME} -d -p ${APP_PORT}:80 ${IMAGE_NAME}
+    - docker run --name ${CONTAINER_NAME} -d -p ${APP_PORT}:8501 ${IMAGE_NAME}
   when: manual
   environment:
     name: staging
