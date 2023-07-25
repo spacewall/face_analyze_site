@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.11
-FROM python:${PYTHON_VERSION}-ubuntu
+FROM python:${PYTHON_VERSION}-ubuntu:latest
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
