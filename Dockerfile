@@ -1,5 +1,5 @@
-ARG PYTHON_VERSION=3.11
-FROM python:${PYTHON_VERSION}-ubuntu
+FROM registry.s.rosatom.education/sirius/docker/ubuntu:20.04
+
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
