@@ -24,7 +24,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     # gfortran
     
 RUN apt update && apt install -y \
-    ffmpeg libsm6 libxext6 wget
+    ffmpeg libsm6 libxext6 wget python3
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
