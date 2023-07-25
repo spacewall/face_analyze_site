@@ -19,8 +19,8 @@ RUN addgroup --gid ${ID} ${USER} && \
     --home /app \
     --shell /sbin/nologin ${USER}
 
-RUN apk update && apk search ffmpeg && \
-    apk add ffmpeg && apk add wget
+RUN apk update && \
+    apk add ffmpeg libsm libxext wget musl-dev linux-headers g++
 
 # RUN apk search -x npm | apk add
 #     # build-essential \
