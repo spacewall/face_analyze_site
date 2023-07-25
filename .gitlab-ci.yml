@@ -79,7 +79,7 @@ deploy_deploy:
   when: manual
   environment:
     name: staging
-    url: http://$APP_ADDRESS:$APP_PORT
+    url: https://$APP_ADDRESS:$APP_PORT
     on_stop: deploy_stop
 
 dast-scan:
@@ -89,7 +89,7 @@ dast-scan:
   when: manual
   script:
     - mkdir -p /zap/wrk
-    - zap-full-scan.py -t "http://$APP_ADDRESS:$APP_PORT" -I -J zap.json
+    - zap-full-scan.py -t "https://$APP_ADDRESS:$APP_PORT" -I -J zap.json
     - cp /zap/wrk/zap.json .
   artifacts:
     when: always
