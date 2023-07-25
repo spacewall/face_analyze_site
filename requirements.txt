@@ -1,5 +1,4 @@
 deepface
-streamlit-camera-input-live
 streamlit
 streamlit_echarts
 pytest

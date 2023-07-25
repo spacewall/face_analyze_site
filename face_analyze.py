@@ -1,7 +1,6 @@
 import os
 import streamlit as st
 from streamlit_echarts import st_echarts
-from camera_input_live import camera_input_live
 from deepface import DeepFace
 from PIL import Image
 
@@ -64,7 +63,7 @@ with col_2:
     st.write("В правом верхнем углу выберете пункт 'Print', чтобы распечатать страницу, или воспользуйтесь сочетанием 'ctrl + s', чтобы сохранить страницу.")
 
 st.divider()
-img_file_buffer = camera_input_live(":blue[Нажмите на кнопку, чтобы снять фото]")
+img_file_buffer = st.camera_input(":blue[Нажмите на кнопку, чтобы снять фото]")
 
 col_3, col_4 = st.columns(2)
 
