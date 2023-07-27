@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:23.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Prevents Python from writing pyc files.
@@ -24,7 +24,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     # gfortran
     
 RUN apt update && apt install -y \
-    wget python3 python3-pip
+    ffmpeg libsm6 libxext6 wget python3 python3-pip
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5 -P /app/.deepface/weights && \
@@ -37,7 +37,7 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
 # into this layer.
 ADD requirements.txt /tmp/requirements.txt
 RUN python3 -m pip install -r /tmp/requirements.txt
-# RUN apt remove linux-libc-dev -y
+RUN apt remove linux-libc-dev -y
 
 WORKDIR /app
 
