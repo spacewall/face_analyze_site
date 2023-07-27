@@ -1,4 +1,4 @@
-FROM python:latest
+FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Prevents Python from writing pyc files.
