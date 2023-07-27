@@ -1,4 +1,4 @@
-FROM ubuntu:23.04
+FROM registry.s.rosatom.education/sirius/docker/ubuntu:23.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Prevents Python from writing pyc files.
