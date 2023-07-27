@@ -23,7 +23,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     # apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
     # gfortran
     
-RUN apt update && apt install -Y \
+RUN apt update && apt install -y \
     ffmpeg libsm6 libxext6 wget python3 python3-pip
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
@@ -37,7 +37,7 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
 # into this layer.
 ADD requirements.txt /tmp/requirements.txt
 RUN python3 -m pip install -r /tmp/requirements.txt
-RUN apt remove linux-libc-dev
+RUN apt remove linux-libc-dev -y
 
 WORKDIR /app
 
