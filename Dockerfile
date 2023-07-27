@@ -37,7 +37,7 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
 # into this layer.
 ADD requirements.txt /tmp/requirements.txt
 RUN python3 -m pip install -r /tmp/requirements.txt
-RUN apt remove linux-libc-dev -y
+RUN apt remove linux-libc-dev -y 
 
 WORKDIR /app
 
