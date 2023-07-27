@@ -23,7 +23,7 @@ RUN addgroup --gid ${ID} ${USER} && \
     # apk add ffmpeg libsm libxext wget musl-dev linux-headers g++ lapack-dev \
     # gfortran
     
-RUN apt update && apt install -y \
+RUN apt update && apt install -Y \
     ffmpeg libsm6 libxext6 wget python3 python3-pip
 
 RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
@@ -32,13 +32,12 @@ RUN mkdir /app/.deepface && mkdir /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/gender_model_weights.h5 -P /app/.deepface/weights && \
     wget https://github.com/serengil/deepface_models/releases/download/v1.0/race_model_single_batch.h5 -P /app/.deepface/weights
 
-RUN apt remove linux-libc-dev
-
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
 ADD requirements.txt /tmp/requirements.txt
 RUN python3 -m pip install -r /tmp/requirements.txt
+RUN apt remove linux-libc-dev
 
 WORKDIR /app
 
