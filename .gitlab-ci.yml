@@ -45,7 +45,7 @@ test_container:
 
 # pylint:
 #   stage: test
-#   image: ubuntu:23.04
+#   image: ubuntu:22.04
 #   before_script:
 #     - apt update
 #     - apt install -y python3 python3-pip
